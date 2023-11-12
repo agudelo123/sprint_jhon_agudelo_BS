@@ -1,0 +1,10 @@
+/* *{
+     background-image: url(optional_banner_3.jpg);
+
+} */
+#carouselExample .carousel-item {
+    height: 30vh;
+}
+#carouselExample .carousel-item.active img {
+    object-fit: cover;
+}
