@@ -1,31 +1,37 @@
  *{
-    background-image: url(optional_banner_3.jpg);
     margin: 0;
     padding: 0;
     box-sizing: border-box;
- background-size: 100vw 100vh;
-color: white;   
+ color: white;
 } 
+nav{
+    background-image: url(optional_banner_3.jpg);
+    background-size: 100vw 100vh;
+}
+body{
+    background-image: url(optional_banner_3.jpg);
+    background-size: 100vw 100vh;
+}
+.card{
+    background-image: url(optional_banner_3.jpg) !important;
+    background-size: 100vw 100vh !important;
+}
 #carouselExampleSlidesOnly .carousel-item {
-    height: 12rem !important;
-    width: 100vw;
+    height: 8rem !important;
 }
 #carouselExampleSlidesOnly .carousel-item.active img {  
     object-fit: cover;
-    height: 12rem !important;
-    width: 100vw;
+    height: 8rem !important;
 }
-#imagenes {
-    height: 13vh;
-    width: 15vw;
+#imagenes{
+    height: 8vh;
+    width: 4vw;
 }
-#tarjetas{
-    max-width: 16vw;
+#tarjetas{ 
+    width: 20vw;
+    height: 60vh;
+    background-image: url(optional_banner_3.jpg);
 }
-#imagenes1 {
-    height: 25vh;
-    width: 38vw;
-}
-#tarjetas1{
-    max-width: 50vw;
+#logo{
+    width: 20vw;
 }

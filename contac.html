@@ -2,44 +2,50 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="main.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="main.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
 </head>
 
 <body>
   <header>
-    <div class="row">
-      <div class="col-md-4">
-        <img class="nav justify-content-start" src="marca.png" alt="">
-      </div>
-      <div class="col-md-7">
-        <ul class="nav justify-content-end">
-          <li class="nav-item">
-            <a class="btn btn-secondary ms-2" href="Home.html">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="btn btn-secondary ms-2" href="upcoming.html">Upcoming-Events</a>
-          </li>
-          <li class="nav-item">
-            <a class="btn btn-secondary ms-2" href="PastEvents.html">Past Events</a>
-          </li>
-          <li class="nav-item">
-            <a class="btn btn-secondary ms-2" href="#">Contac</a>
-          </li>
-          <li class="nav-item">
-            <a class="btn btn-secondary ms-2" href="Details.html">Details</a>
-          </li>
-          <li class="nav-item">
-            <a class="btn btn-secondary ms-2" href="Stats.html">Stats</a>
-          </li>
-        </ul>
-      </div>
-    </div>
 
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+      <div class="container-fluid ">
+        <img id="logo" class="nav justify-content-around" src="marca.png" alt="">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="d-flex justify-content-end" id="navbarSupportedContent">
+          <ul class="navbar-nav ">
+            <li class="nav-item">
+              <a class="btn btn-secondary ms-2" href="Home.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="btn btn-secondary ms-2" href="upcoming.html">Upcoming-Events</a>
+            </li>
+            <li class="nav-item">
+              <a class="btn btn-secondary ms-2" href="PastEvents.html">Past Events</a>
+            </li>
+            <li class="nav-item">
+              <a class="btn btn-secondary ms-2" href="#">Contac</a>
+            </li>
+            <li class="nav-item">
+              <a class="btn btn-secondary ms-2" href="Details.html">Details</a>
+            </li>
+            <li class="nav-item">
+              <a class="btn btn-secondary ms-2" href="Stats.html">Stats</a>
+            </li>
+          </ul>
+
+        </div>
+      </div>
+    </nav>
     <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
       <div class="carousel-inner">
         <div class="carousel-item active">
@@ -57,38 +63,51 @@
   </header>
     <main>
       <form>
-        <div class="mb-3">
-          <label for="nombres" class="form-label">nombre</label>
+        <div class="mb-3 ">
+          <label for="nombres" class="form-label">Name</label>
           <input type="text" class="form-control" id="nombres" aria-describedby="First name">
-          <div id="name" class="form-text">Please enter your name</div>
+          <div id="name" class="form-text text-light">Please enter your name</div>
         </div>
         <div class="mb-3">
           <label for="exampleInputEmail1" class="form-label">Email address</label>
           <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-          <div id="emailHelp" class="form-text">please enter your Email address</div>
+          <div id="emailHelp" class="form-text text-light">please enter your Email address</div>
         </div><div class="mb-3">
-          <label for="mensaje" class="form-label">message</label>
+          <label for="mensaje" class="form-label">Message</label>
           <input type="text" class="form-control" id="mensaje" aria-describedby="comentarios">
-          <div id="comentarios" class="form-text">leave your message</div>
+          <div id="comentarios" class="form-text text-light">Leave your message</div>
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>
     </main>
     <footer>
-        <div class="row">
-          <div class="col-md-1">
-            <a href="https://web.facebook.com/?_rdc=1&_rdr"><img src="facebook.png" alt="facebook"></a>
+      <nav class="navbar navbar-expand-lg ">
+        <div class="container-fluid">
+          <!-- carrusel fin -->
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item m-2">
+                <a href="https://web.facebook.com/?_rdc=1&_rdr"><img id="imagenes" src="facebook.png" alt="facebook"></a>
+              </li>
+  
+              <li class="nav-item m-2">
+                <a href="https://web.whatsapp.com/"><img id="imagenes" src="whatsapp.png" alt="whatsapp"></a>
+              </li>
+  
+              <li class="nav-item m-2">
+                <a href="https://www.instagram.com/"><img id="imagenes" src="instagram.png" alt="instagram"></a>
+              </li>
+  
+            </ul>
+  
           </div>
-          <div class="col-md-1">
-            <a href="https://www.instagram.com/"><img src="instagram.png" alt="instagram"></a>
-          </div>
-          <div class="col-md-1">
-            <a href="https://web.whatsapp.com/"><img src="whatsapp.png" alt="whatsapp"></a>
-          </div>
-          <div class="col-md-1 offset-md-8">
-            <img class="align-self-end" src="logo.png" alt="logo">
-          </div>
+          <img id="imagenes" class="align-self-end" src="logo.png" alt="logo">
         </div>
+      </nav>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
 </body>
