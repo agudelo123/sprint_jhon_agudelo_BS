@@ -15,6 +15,7 @@ body{
 .card{
     background-image: url(optional_banner_3.jpg) !important;
     background-size: 100vw 100vh !important;
+    
 }
 #carouselExampleSlidesOnly .carousel-item {
     height: 8rem !important;
@@ -29,7 +30,7 @@ body{
 }
 #tarjetas{ 
     width: 20vw;
-    height: 60vh;
+    height: 70vh;
     background-image: url(optional_banner_3.jpg);
 }
 #logo{
