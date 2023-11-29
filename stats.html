@@ -46,20 +46,36 @@
         </div>
       </div>
     </nav>
-    <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
-      <div class="carousel-inner">
-        <div class="carousel-item active">
-          <img src="books.jpg" class="d-block w-100" alt="...">
-        </div>
-        <div class="carousel-item">
-          <img src="cinema.jpg" class="d-block w-100" alt="...">
-        </div>
-        <div class="carousel-item">
-          <img src="costume_party.jpg" class="d-block w-100" alt="...">
+    <div class="position-relative">
+      <div class="carousel-caption d-none d-md-block">
+        <h2 class="position-absolute top-50 start-50 translate-middle text-black">
+          Stats
+        </h2>
+      </div>
+
+      <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="books.jpg" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-block">
+              <h2 class="text-black">Stats</h2>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <img src="cinema.jpg" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-block">
+              <h2 class="text-white">Stats</h2>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <img src="costume_party.jpg" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-block">
+              <h2 class="text-black">Stats</h2>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-
   </header>
   <main>
     <div class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 w-100 px-5 text-align-center">
@@ -69,7 +85,7 @@
           <tr>
             <th colspan="3" class="tbody-title text-center">Events statistics</th>
           </tr>
-          <tr style="font-weight:bold;">
+          <tr id="estilo">
             <td>Event with the highest percentaje of attendance</td>
             <td>Event with the lowest percentaje of attendance</td>
             <td>Event with larger capacity</td>
@@ -84,7 +100,7 @@
           </tr>
 
           <tr>
-          <tr style="font-weight:bold;">
+          <tr id="estilo">
             <td>Category</td>
             <td>Total Revenue</td>
             <td>Average Attendance</td>

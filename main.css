@@ -31,8 +31,15 @@ body{
 #tarjetas{ 
     width: 20vw;
     height: 70vh;
-    background-image: url(optional_banner_3.jpg);
+    background-color: black;
+
 }
 #logo{
+    width: 20vw;
+}
+#estilos{
+font-weight:bold}
+#imagenes2{
+    height: 30vh;
     width: 20vw;
 }
