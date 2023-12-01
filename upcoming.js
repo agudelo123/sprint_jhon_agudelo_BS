@@ -195,53 +195,56 @@ const data = {
   ],
 };
 document.addEventListener("DOMContentLoaded", function () {
-  let carouselInner = document.getElementById("carouselInner");
+  const carouselInner = document.getElementById("carouselInner");
+  const itemsPerContainer = 4;
+  const currentDate = new Date(data.currentDate);
+  const filteredEvents = data.events.filter(event => {
+    const eventDate = new Date(event.date);
+    return eventDate > currentDate;
+  });
 
-  let contadorContenedor = 0;
-  let itemsPerContainer = 4;
+  let currentContainer;
 
-  data.events.forEach((element, index) => {
+  filteredEvents.forEach((element, index) => {
     if (index % itemsPerContainer === 0) {
-      contadorContenedor++;
-
-      let carouselItem = document.createElement("div");
+      const carouselItem = document.createElement("div");
       carouselItem.classList.add("carousel-item");
-      if (contadorContenedor === 1) {
+      if (index === 0) {
         carouselItem.classList.add("active");
       }
-
-      let containerDiv = document.createElement("div");
-      containerDiv.classList.add("d-flex", "justify-content-around");
-      containerDiv.id = `itemflex${contadorContenedor}`;
-      carouselItem.appendChild(containerDiv);
-
+      currentContainer = document.createElement("div");
+      currentContainer.classList.add("d-flex", "justify-content-around");
+      carouselItem.appendChild(currentContainer);
       carouselInner.appendChild(carouselItem);
     }
 
-    let tarjetaId = `tarjeta-${index}`;
-    let cardDiv = document.createElement("div");
-    cardDiv.id = tarjetaId;
-    cardDiv.classList.add("card");
-
-    // Contenido de tu tarjeta
-    cardDiv.innerHTML = `
-      <div id="${tarjetaId}" class="card">
-      <img src="${element.image}" class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">${element.name}</h5>
-        <p class="card-text">${element.description}</p>
-        <p class="card-text">category: ${element.category}</p>
-        <p class="card-text">place: ${element.place}</p>
-        <p class="text-white bg-dark p-2">fecha: ${element.date}</p>
-        <div class="d-flex justify-content-between align-items-end mt-auto">
-          <p class="card-text">price: ${element.price}</p>
-          <a href="Details.html" class="btn btn-primary m-2">Go somewhere</a>
-        </div>
-      </div>
-    </div>
-    `;
-
-    let currentContainer = document.getElementById(`itemflex${contadorContenedor}`);
+    const cardDiv = createCard(element);
     currentContainer.appendChild(cardDiv);
   });
 });
+
+function createCard(element) {
+  const tarjetaId = `tarjeta-${element._id}`;
+  const cardDiv = document.createElement("div");
+  cardDiv.id = tarjetaId;
+  cardDiv.classList.add("card");
+
+  cardDiv.innerHTML = `
+      <div id="${tarjetaId}" class="card tarjetas">
+        <img src="${element.image}" class="card-img-top imagenes2" alt="...">
+        <div class="card-body">
+          <h5 class="card-title titulo">${element.name}</h5>
+          <p class="card-text">${element.description}</p>
+          <p class="card-text">category: ${element.category}</p>
+          <p class="card-text">place: ${element.place}</p>
+          <p class="text-white bg-dark p-2">fecha: ${element.date}</p>
+          <div class="d-flex justify-content-between align-items-end mt-auto">
+            <p class="card-text">price: ${element.price}</p>
+            <a href="Details.html" class="btn btn-primary m-2">Go somewhere</a>
+          </div>
+        </div>
+      </div>
+    `;
+
+  return cardDiv;
+}

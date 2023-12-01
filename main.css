@@ -16,8 +16,8 @@ body {
 }
 
 .card {
-    background-image: url(optional_banner_3.jpg) !important;
     background-size: 100vw 100vh !important;
+    background-color: black !important;
 }
 
 #carouselExampleSlidesOnly .carousel-item {
@@ -48,7 +48,11 @@ body {
     font-weight: bold;
 }
 
-#imagenes2 {
+.imagenes2 {
     height: 30vh;
     width: 20vw;
+}
+.titulo{
+    color: gray !important;
+    text-transform: uppercase;
 }
