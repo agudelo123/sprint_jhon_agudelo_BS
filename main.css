@@ -29,7 +29,7 @@ body {
     height: 8rem !important;
 }
 
-#imagenes {
+.imagenes {
     height: 8vh;
     width: 4vw;
 }
@@ -44,7 +44,7 @@ body {
     width: 20vw;
 }
 
-#estilos {
+.estilos {
     font-weight: bold;
 }
 

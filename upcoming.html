@@ -78,55 +78,60 @@
     </div>
   </header>
   <main>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
-      <div class="container-fluid">
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <div class="form-check m-2">
-              <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-              <label class="form-check-label" for="defaultCheck1">
-                Food Fair
-              </label>
-            </div>
-            <div class="form-check m-2">
-              <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-              <label class="form-check-label" for="defaultCheck1">
-                Museum
-              </label>
-            </div>
-            <div class="form-check m-2">
-              <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-              <label class="form-check-label" for="defaultCheck1">
-                Costume Party
-              </label>
-            </div>
-            <div class="form-check m-2">
-              <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-              <label class="form-check-label" for="defaultCheck1">
-                Music Concert
-              </label>
-            </div>
-            <div class="form-check m-2">
-              <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-              <label class="form-check-label" for="defaultCheck1">
-                Race
-              </label>
-            </div>
-            <div class="form-check m-2">
-              <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-              <label class="form-check-label" for="defaultCheck1">
-                Let's go to the cinema
-              </label>
-            </div>
-          </ul>
-          <form class="d-flex" role="search">
-            <input class="form-control me-2" type="search" placeholder="Let's go to the cinema" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Search</button>
-          </form>
-        </div>
-      </div>
-    </nav>
-
+<!-- estos son los checkbox -->
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <div class="collapse navbar-collapse">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <div class="form-check m-2">
+            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+            <label class="form-check-label" for="defaultCheck1">
+              Food Fair
+            </label>
+          </div>
+        </li>
+        <li class="nav-item">
+          <div class="form-check m-2">
+            <input class="form-check-input" type="checkbox" value="" id="defaultCheck2">
+            <label class="form-check-label" for="defaultCheck1">
+              Museum
+            </label>
+          </div>
+        </li>
+        <li class="nav-item">
+          <div class="form-check m-2">
+            <input class="form-check-input" type="checkbox" value="" id="defaultCheck3">
+            <label class="form-check-label" for="defaultCheck1">
+              Costume Party
+            </label>
+          </div>
+        </li>
+        <li class="nav-item">
+          <div class="form-check m-2">
+            <input class="form-check-input" type="checkbox" value="" id="defaultCheck4">
+            <label class="form-check-label" for="defaultCheck1">
+              Music Concert
+            </label>
+          </div>
+        </li>
+        <li class="nav-item">
+          <div class="form-check m-2">
+            <input class="form-check-input" type="checkbox" value="" id="defaultCheck5">
+            <label class="form-check-label" for="defaultCheck1">
+              Let's go to the cinema
+            </label>
+          </div>
+        </li>
+      </ul>
+      <form class="d-flex" role="search">
+        <input class="form-control me-2" type="search" placeholder="search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+    </div>
+  </div>
+</nav>
+<!-- Aqui cierran los checkbox -->
     <!-- carrusel inicio -->
 <div id="carouselExampleRide" class="carousel slide" data-bs-ride="carousel">
   <div class="carousel-inner" id="carouselInner">
@@ -155,24 +160,25 @@
           aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent2">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item m-2">
-              <a href="https://web.facebook.com/?_rdc=1&_rdr"><img id="imagenes" src="facebook.png" alt="facebook"></a>
+              <a href="https://web.facebook.com/?_rdc=1&_rdr"><img class="imagenes" src="facebook.png"
+                  alt="facebook"></a>
             </li>
 
             <li class="nav-item m-2">
-              <a href="https://web.whatsapp.com/"><img id="imagenes" src="whatsapp.png" alt="whatsapp"></a>
+              <a href="https://web.whatsapp.com/"><img class="imagenes" src="whatsapp.png" alt="whatsapp"></a>
             </li>
 
             <li class="nav-item m-2">
-              <a href="https://www.instagram.com/"><img id="imagenes" src="instagram.png" alt="instagram"></a>
+              <a href="https://www.instagram.com/"><img class="imagenes" src="instagram.png" alt="instagram"></a>
             </li>
 
           </ul>
 
         </div>
-        <img id="imagenes" class="align-self-end" src="logo.png" alt="logo">
+        <img class="align-self-end imagenes" src="logo.png" alt="logo">
       </div>
     </nav>
   </footer>
