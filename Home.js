@@ -1,4 +1,4 @@
-  const data = {
+const data = {
   currentDate: "2023-01-01",
   events: [
     {
@@ -194,14 +194,13 @@
     },
   ],
 };
-function createEventCard(event, index) {
-  const tarjetaId = `tarjeta-${index}`;
-  const cardDiv = document.createElement("div");
-  cardDiv.id = tarjetaId;
-  cardDiv.classList.add("card");
 
+function createEventCard(event, tarjetaId) {
+  const cardDiv = document.createElement("div");
+  cardDiv.id = tarjetaId || `event-card-${event._id}`;
+  cardDiv.classList.add("card"); // Solo añadimos la clase 'card', 'tarjetas' ya se incluye en el innerHTML
   cardDiv.innerHTML = `
-    <div id="${tarjetaId}" class="card tarjetas">
+    <div class="tarjetas">
       <img src="${event.image}" class="card-img-top imagenes2" alt="...">
       <div class="card-body">
         <h5 class="card-title titulo">${event.name}</h5>
@@ -216,39 +215,115 @@ function createEventCard(event, index) {
       </div>
     </div>
   `;
-
   return cardDiv;
+}
+
+function createCheckBoxes(events) {
+  const categories = [...new Set(events.map(event => event.category))];
+  const checkboxContainer = document.getElementById("checkboxContainer");
+
+  categories.forEach(category => {
+    const checkboxDiv = document.createElement("div");
+    checkboxDiv.classList.add("form-check", "m-2");
+
+    const checkboxInput = document.createElement("input");
+    checkboxInput.classList.add("form-check-input");
+    checkboxInput.type = "checkbox";
+    checkboxInput.value = category;
+    checkboxInput.id = `checkbox-${category.replace(/\s+/g, "-").toLowerCase()}`;
+    checkboxInput.addEventListener("change", handleCheckboxChange);
+
+    const checkboxLabel = document.createElement("label");
+    checkboxLabel.classList.add("form-check-label");
+    checkboxLabel.setAttribute("for", `checkbox-${category.replace(/\s+/g, "-").toLowerCase()}`);
+    checkboxLabel.textContent = category;
+
+    checkboxDiv.appendChild(checkboxInput);
+    checkboxDiv.appendChild(checkboxLabel);
+
+    checkboxContainer.appendChild(checkboxDiv);
+  });
+}
+let carouselCreated = false;
+let carouselInner;
+;
+
+function updateContent(events) {
+  const eventsContainer = document.getElementById("eventsContainer");
+  // Limpieza de contenedores
+  eventsContainer.innerHTML = '';
+  if (events.length === 0) {
+    // Si no hay eventos que mostrar, presentamos un mensaje al usuario
+    const noEventsMessage = document.createElement("div");
+    noEventsMessage.classList.add("no-events-message");
+    noEventsMessage.textContent = "No events found that match the criteria."; // Mensaje de no encontrado
+    eventsContainer.appendChild(noEventsMessage);
+  } else {
+    // Creación de tarjetas para cada evento y agregado al contenedor de eventos
+    events.forEach(event => {
+      const eventCard = createEventCard(event);
+      eventsContainer.appendChild(eventCard);
+    });
+  }
 }
 
 function createCarouselContainers(events, itemsPerContainer) {
   const carouselInner = document.getElementById("carouselInner");
-  let contadorContenedor = 0;
-
-  events.forEach((element, index) => {
-    if (index % itemsPerContainer === 0) {
-      contadorContenedor++;
-
-      const carouselItem = document.createElement("div");
-      carouselItem.classList.add("carousel-item");
-      if (contadorContenedor === 1) {
-        carouselItem.classList.add("active");
-      }
-
-      const containerDiv = document.createElement("div");
-      containerDiv.classList.add("d-flex", "justify-content-around");
-      containerDiv.id = `itemflex${contadorContenedor}`;
-      carouselItem.appendChild(containerDiv);
-
-      carouselInner.appendChild(carouselItem);
+  const existingCards = document.querySelectorAll("#eventsContainer > .card");
+  // Limpieza del carrusel para evitar duplicados
+  carouselInner.innerHTML = '';
+  for (let i = 0; i < existingCards.length; i += itemsPerContainer) {
+    const carouselItem = document.createElement("div");
+    carouselItem.classList.add("carousel-item");
+    if (i === 0) {
+      carouselItem.classList.add("active");
     }
-
-    const cardDiv = createEventCard(element, index);
-    const currentContainer = document.getElementById(`itemflex${contadorContenedor}`);
-    currentContainer.appendChild(cardDiv);
-  });
+    const containerDiv = document.createElement("div");
+    containerDiv.classList.add("d-flex", "justify-content-around");
+    
+    // Mover tarjetas existentes al carrusel en grupos de "itemsPerContainer"
+    for (let j = i; j < i + itemsPerContainer; j++) {
+      if (existingCards[j]) {
+        containerDiv.appendChild(existingCards[j]);
+      }
+    }
+    carouselItem.appendChild(containerDiv);
+    carouselInner.appendChild(carouselItem);
+  }
 }
 
-document.addEventListener("DOMContentLoaded", function () {
-  const itemsPerContainer = 4;
-  createCarouselContainers(data.events, itemsPerContainer);
+
+
+document.addEventListener('DOMContentLoaded', function () {
+  createCheckBoxes(data.events);
+  updateContent(data.events); // Crear tarjetas de eventos
+  createCarouselContainers(data.events, 4); // Inicializar carrusel
+  const searchInput = document.querySelector('input[type="search"]');
+  searchInput.addEventListener('keyup', handleSearchEvent); // Listener en el campo de búsqueda en lugar del formulario
 });
+function handleSearchEvent() {
+  const searchText = this.value.toLowerCase(); // 'this' hace referencia al input de búsqueda
+  const filteredEvents = data.events.filter(evt =>
+    evt.name.toLowerCase().includes(searchText) || 
+    evt.description.toLowerCase().includes(searchText)
+  );
+  
+  applyFilters(filteredEvents);
+}
+function applyFilters(filteredEvents) {
+  // Filter again using selected categories
+  const checkedCategories = Array.from(document.querySelectorAll('input[type="checkbox"]:checked'))
+    .map(checkbox => checkbox.value);
+    
+  const eventsToShow = checkedCategories.length > 0 ?
+    filteredEvents.filter(event => checkedCategories.includes(event.category)) :
+    filteredEvents;
+  updateContent(eventsToShow);
+  createCarouselContainers(eventsToShow, 4);
+}
+function handleCheckboxChange() {
+  // Instead of directly calling updateContent and createCarouselContainers
+  // We'll now call a function that applies both filters
+  applyFilters(data.events);
+}
+
