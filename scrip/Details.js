@@ -217,7 +217,7 @@ const data = {
   
     cardDiv.innerHTML = `
       <div id="${tarjetaId}" class=" tarjetas ">
-        <img src="${event.image}" class="card-img-top imagenes2 " alt="...">
+        <img src="${event.image}" class="card-img-top " alt="...">
         <div class="card-body">
           <h5 class="card-title titulo">${event.name}</h5>
           <p class="card-text">${event.description}</p>
@@ -228,6 +228,9 @@ const data = {
           ${attendanceInfo}
           <div class="d-flex justify-content-between align-items-end mt-auto">
             <p class="card-text">price: ${event.price}</p>
+            <div class="return-home-container">
+  <a href="Home.html" class="btn btn-primary ">Volver a Home</a>
+</div>
           </div>
         </div>
       </div>
@@ -236,35 +239,39 @@ const data = {
     return cardDiv;
   }
   
-  function createCarouselContainers(events, itemsPerContainer) {
+  function createCarouselContainers(events) {
     const carouselInner = document.getElementById("carouselInner");
-    let contadorContenedor = 0;
-  
-    events.forEach((element, index) => {
-      if (index % itemsPerContainer === 0) {
-        contadorContenedor++;
-  
-        const carouselItem = document.createElement("div");
-        carouselItem.classList.add("carousel-item");
-        if (contadorContenedor === 1) {
-          carouselItem.classList.add("active");
-        }
-  
-        const containerDiv = document.createElement("div");
-        containerDiv.classList.add("d-flex", "justify-content-around");
-        containerDiv.id = `itemflex${contadorContenedor}`;
-        carouselItem.appendChild(containerDiv);
-  
-        carouselInner.appendChild(carouselItem);
+    carouselInner.innerHTML = ''; // Limpia el carrusel antes de agregar nuevos elementos
+    // Dependiendo del número de eventos se añaden al carrusel
+    events.forEach(event => {
+      const carouselItem = document.createElement("div");
+      carouselItem.classList.add("carousel-item");
+      if (events.indexOf(event) === 0) {
+        carouselItem.classList.add("active"); // Solo el primer contenedor tiene la clase 'active'
       }
-  
-      const cardDiv = createEventCard(element, index);
-      const currentContainer = document.getElementById(`itemflex${contadorContenedor}`);
-      currentContainer.appendChild(cardDiv);
+      // Suponemos que `createEventCard` es una función que sabe cómo construir
+      // el HTML para cada evento. Debe estar definida en otra parte de tu código.
+      const eventCard = createEventCard(event);
+      carouselItem.appendChild(eventCard);
+      carouselInner.appendChild(carouselItem);
     });
   }
   
+  function getEventIdFromUrl() {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get('id');
+  }
+  
   document.addEventListener("DOMContentLoaded", function () {
-    const itemsPerContainer = 1;
-    createCarouselContainers(data.events, itemsPerContainer);
+    const eventId = getEventIdFromUrl();
+    if (eventId) {
+      const event = data.events.find(e => e._id === eventId);
+      if (event) {
+        createCarouselContainers([event]); // Crea un carrusel para el evento específico
+      } else {
+        console.error(`Event with ID ${eventId} not found`);
+      }
+    } else {
+      createCarouselContainers(data.events); // Crea un carrusel con todos los eventos
+    }
   });

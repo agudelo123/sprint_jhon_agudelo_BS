@@ -1,3 +1,10 @@
+
+
+
+
+
+
+
 const data = {
   currentDate: "2023-01-01",
   events: [
@@ -194,11 +201,14 @@ const data = {
     },
   ],
 };
-
+function filterComingEvents(events) {
+  const currentDateObj = new Date(data.currentDate);
+  return events.filter(event => new Date(event.date) > currentDateObj);
+}
 function createEventCard(event, tarjetaId) {
   const cardDiv = document.createElement("div");
   cardDiv.id = tarjetaId || `event-card-${event._id}`;
-  cardDiv.classList.add("card"); // Solo añadimos la clase 'card', 'tarjetas' ya se incluye en el innerHTML
+  cardDiv.classList.add("card"); 
   cardDiv.innerHTML = `
     <div class="tarjetas">
       <img src="${event.image}" class="card-img-top imagenes2" alt="...">
@@ -210,8 +220,7 @@ function createEventCard(event, tarjetaId) {
         <p class="text-white bg-dark p-2">fecha: ${event.date}</p>
         <div class="d-flex justify-content-between align-items-end mt-auto">
           <p class="card-text">price: ${event.price}</p>
-          <a href="Details.html" class="btn btn-primary m-2">Go somewhere</a>
-        </div>
+          <a href="Details.html?id=${event._id}" class="btn btn-primary m-2">Go somewhere</a>        </div>
       </div>
     </div>
   `;
@@ -250,21 +259,23 @@ let carouselInner;
 
 function updateContent(events) {
   const eventsContainer = document.getElementById("eventsContainer");
-  // Limpieza de contenedores
-  eventsContainer.innerHTML = '';
+  eventsContainer.innerHTML = ''; // Vaciamos el contenedor antes de añadir el contenido filtrado
+
+  // Verificamos si hay eventos para mostrar y procedemos en consecuencia
   if (events.length === 0) {
-    // Si no hay eventos que mostrar, presentamos un mensaje al usuario
     const noEventsMessage = document.createElement("div");
     noEventsMessage.classList.add("no-events-message");
-    noEventsMessage.textContent = "No events found that match the criteria."; // Mensaje de no encontrado
+    noEventsMessage.textContent = "No upcoming events found that match the criteria.";
     eventsContainer.appendChild(noEventsMessage);
   } else {
-    // Creación de tarjetas para cada evento y agregado al contenedor de eventos
     events.forEach(event => {
       const eventCard = createEventCard(event);
       eventsContainer.appendChild(eventCard);
     });
   }
+
+  // Una vez el contenido ha sido actualizado, llamamos a createCarouselContainers
+  createCarouselContainers(events, 4);
 }
 
 function createCarouselContainers(events, itemsPerContainer) {
@@ -280,7 +291,7 @@ function createCarouselContainers(events, itemsPerContainer) {
     }
     const containerDiv = document.createElement("div");
     containerDiv.classList.add("d-flex", "justify-content-around");
-    
+
     // Mover tarjetas existentes al carrusel en grupos de "itemsPerContainer"
     for (let j = i; j < i + itemsPerContainer; j++) {
       if (existingCards[j]) {
@@ -293,37 +304,43 @@ function createCarouselContainers(events, itemsPerContainer) {
 }
 
 
-
 document.addEventListener('DOMContentLoaded', function () {
-  createCheckBoxes(data.events);
-  updateContent(data.events); // Crear tarjetas de eventos
-  createCarouselContainers(data.events, 4); // Inicializar carrusel
-  const searchInput = document.querySelector('input[type="search"]');
-  searchInput.addEventListener('keyup', handleSearchEvent); // Listener en el campo de búsqueda en lugar del formulario
+  createCheckBoxes(filterComingEvents(data.events)); // Crea checkboxes para cada categoría única en eventos futuros
+  applyFilters(); // Aplica los filtros para mostrar inicialmente solo los eventos futuros
+  // Configurar los listeners de evento en los campos de búsqueda y checkboxes
+  document.querySelector('input[type="search"]').addEventListener('input', handleSearchEvent);
+  document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+    checkbox.addEventListener('change', handleCheckboxChange);
+  });
 });
+
 function handleSearchEvent() {
-  const searchText = this.value.toLowerCase(); // 'this' hace referencia al input de búsqueda
-  const filteredEvents = data.events.filter(evt =>
-    evt.name.toLowerCase().includes(searchText) || 
-    evt.description.toLowerCase().includes(searchText)
-  );
-  
-  applyFilters(filteredEvents);
+  const comingEvents = filterComingEvents(data.events); // Filtra eventos futuros para la búsqueda
+  applyFilters(comingEvents);
 }
-function applyFilters(filteredEvents) {
-  // Filter again using selected categories
+function applyFilters() {
+  // Primero filtrar eventos futuros
+  let filteredEvents = filterComingEvents(data.events);
+  // Obtener valores de la interfaz de usuario para la búsqueda y los checkboxes
+  const searchText = document.querySelector('input[type="search"]').value.toLowerCase();
   const checkedCategories = Array.from(document.querySelectorAll('input[type="checkbox"]:checked'))
     .map(checkbox => checkbox.value);
-    
-  const eventsToShow = checkedCategories.length > 0 ?
-    filteredEvents.filter(event => checkedCategories.includes(event.category)) :
-    filteredEvents;
-  updateContent(eventsToShow);
-  createCarouselContainers(eventsToShow, 4);
-}
-function handleCheckboxChange() {
-  // Instead of directly calling updateContent and createCarouselContainers
-  // We'll now call a function that applies both filters
-  applyFilters(data.events);
+  // Filtrar por categorías si hay checkboxes seleccionados
+  if (checkedCategories.length > 0) {
+    filteredEvents = filteredEvents.filter(event => checkedCategories.includes(event.category));
+  }
+  // Filtrar por el texto de búsqueda si hay texto ingresado
+  if (searchText) {
+    filteredEvents = filteredEvents.filter(event =>
+      event.name.toLowerCase().includes(searchText) ||
+      event.description.toLowerCase().includes(searchText)
+    );
+  }
+  // Actualizar el contenido con los eventos filtrados
+  updateContent(filteredEvents);
 }
 
+function handleCheckboxChange() {
+  const comingEvents = filterComingEvents(data.events); // Filtra eventos futuros
+  applyFilters(comingEvents);
+}

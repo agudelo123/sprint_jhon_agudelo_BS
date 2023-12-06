@@ -49,8 +49,17 @@
     text-transform: uppercase;
 }
 .no-events-message {
-    color: white;
+    color: black;
     text-align: center;
     padding: 20px;
     font-size: 1.5em;
+  }
+
+  .botonNext{
+    margin-top: 81px;
+margin-left: -47px;
+  }
+  .botonPreviuw{
+    margin-top: 81px;
+margin-left: -47px;
   }
