@@ -208,7 +208,7 @@ const data = {
   
     const tarjetaId = `tarjeta-${index}`;
     const cardDiv = document.createElement("div");
-    cardDiv.id = tarjetaId;
+    cardDiv.id = `tarjeta-${event._id}`;
     cardDiv.classList.add("card");
     cardDiv.style.marginTop = "20px"
     cardDiv.style.fontSize = "1rem"; // Incrementar tamaño de la fuente
