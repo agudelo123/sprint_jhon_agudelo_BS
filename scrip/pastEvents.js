@@ -100,10 +100,9 @@ function createCarouselContainers(events, itemsPerContainer) {
 
 document.addEventListener('DOMContentLoaded', function () {
   // Crea checkboxes para cada categoría única en eventos pasados
-  createCheckBoxes(data.events); // Asegúrese de pasar toda la lista de eventos, `filterPastEvents` se llamará en `applyFilters`
+  createCheckBoxes(data.events);
   // Aplica los filtros para mostrar inicialmente solo los eventos pasados
-  applyFilters(); // No necesitamos llamar a `filterPastEvents` aquí, porque `applyFilters` ya lo hace
-  // Configurar los listeners de evento en los campos de búsqueda y checkboxes
+  applyFilters();
   document.querySelector('input[type="search"]').addEventListener('input', handleSearchEvent);
   document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
     checkbox.addEventListener('change', handleCheckboxChange);
@@ -111,7 +110,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 function handleSearchEvent() {
-  const pastEvents = filterComingEvents(data.events); // Filtra eventos futuros para la búsqueda
+  const pastEvents = filterComingEvents(data.events); 
   applyFilters(pastEvents);
 }
 
@@ -133,6 +132,6 @@ function applyFilters(filteredEvents = filterPastEvents(data.events)) {
 
 
 function handleCheckboxChange() {
-  const pastEvents = filterComingEvents(data.events); // Filtra eventos futuros
+  const pastEvents = filterComingEvents(data.events); 
   applyFilters(pastEvents);
 }

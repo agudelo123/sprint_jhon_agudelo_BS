@@ -199,7 +199,6 @@ const data = {
   });
   function fillStatsTable(events, currentDate) {
     const statsSection = document.querySelector('table.table > tbody');
-    // Borrar el contenido previo del tbody
     statsSection.innerHTML = '';
     // Obtener estadísticas de eventos
     const stats = calculateStats(events, currentDate);
@@ -213,9 +212,7 @@ const data = {
     insertEventData(statsSection, pastEvents, 'Past Events');
   }
   function calculateStats(events) {
-    // Aquí debes calcular las estadísticas de tus eventos.
-    // Implementar un método o una serie de funciones para calcular lo que necesitas.
-    // Por ejemplo, puedes usar un enfoque como el siguiente para calcular el evento con mayor asistencia
+    // Aquí debes calcular las estadísticas de tus eventos. 
     let highestAttendanceEvent = events[0];
     let lowestAttendanceEvent = events[0];
     let largestCapacityEvent = events[0];
@@ -259,14 +256,12 @@ const data = {
     `;
   }
   function insertEventData(parentElement, events, eventType) {
-    // Añade un título para la sección de eventos próximos o pasados
     parentElement.innerHTML += `
       <tr>
         <th colspan="3" class="tbody-title text-center">${eventType}</th>
       </tr>
     `;
     
-    // Añade una fila para cada evento
     events.forEach(event => {
       parentElement.innerHTML += `
         <tr class="estilo">

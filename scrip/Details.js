@@ -211,9 +211,8 @@ const data = {
     cardDiv.id = `tarjeta-${event._id}`;
     cardDiv.classList.add("card");
     cardDiv.style.marginTop = "20px"
-    cardDiv.style.fontSize = "1rem"; // Incrementar tamaño de la fuente
+    cardDiv.style.fontSize = "1rem";
     cardDiv.style.padding = "20px";
-     // Agregar más padding
   
     cardDiv.innerHTML = `
       <div id="${tarjetaId}" class=" tarjetas ">
@@ -242,15 +241,12 @@ const data = {
   function createCarouselContainers(events) {
     const carouselInner = document.getElementById("carouselInner");
     carouselInner.innerHTML = ''; // Limpia el carrusel antes de agregar nuevos elementos
-    // Dependiendo del número de eventos se añaden al carrusel
     events.forEach(event => {
       const carouselItem = document.createElement("div");
       carouselItem.classList.add("carousel-item");
       if (events.indexOf(event) === 0) {
-        carouselItem.classList.add("active"); // Solo el primer contenedor tiene la clase 'active'
+        carouselItem.classList.add("active"); 
       }
-      // Suponemos que `createEventCard` es una función que sabe cómo construir
-      // el HTML para cada evento. Debe estar definida en otra parte de tu código.
       const eventCard = createEventCard(event);
       carouselItem.appendChild(eventCard);
       carouselInner.appendChild(carouselItem);
@@ -272,6 +268,6 @@ const data = {
         console.error(`Event with ID ${eventId} not found`);
       }
     } else {
-      createCarouselContainers(data.events); // Crea un carrusel con todos los eventos
+      createCarouselContainers(data.events);
     }
   });

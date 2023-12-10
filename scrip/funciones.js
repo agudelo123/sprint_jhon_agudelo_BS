@@ -268,7 +268,6 @@ export function updateContent(events) {
 }
 export function createCarouselContainers(events, itemsPerContainer) {
     const carouselInner = document.getElementById("carouselInner");
-    // Asegúrate de que carouselInner existe en tu DOM
     
     // Limpieza del carrusel para evitar duplicados
     carouselInner.innerHTML = '';
@@ -279,7 +278,7 @@ export function createCarouselContainers(events, itemsPerContainer) {
       containerDiv.classList.add("d-flex", "justify-content-around");
       for (let j = i; j < i + itemsPerContainer; j++) {
         if (events[j]) {
-          // Asumiendo que createEventCard devuelve un nodo de tarjeta con la estructura correcta
+          // Asumiendo que createEventCard devuelve un nodo de tarjeta
           containerDiv.appendChild(createEventCard(events[j]));
         }
       }
